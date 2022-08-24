@@ -66,7 +66,7 @@ const HeaderContainer = styled.header`
         top: 33px;
         padding: 0 10px;
         box-shadow: 0 8px 10px 0px #000;
-        width: 185px;
+        width: 165px;
     }
 
     .header-go-to-cart-container {
@@ -83,6 +83,12 @@ const HeaderContainer = styled.header`
 
     .header-go-to-cart-name {
         font-size: 12px;
+    }
+
+    @media only screen and (min-width: 550px) {
+        .header-categories-container {
+            width: 185px;
+        }
     }
 
     @media only screen and (min-width: 650px) {

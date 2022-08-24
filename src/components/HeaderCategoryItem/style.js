@@ -32,11 +32,12 @@ const HeaderCategoryItemContainer = styled.li`
     .header-subcategories-container {
         position: absolute;
         top: -10px;
-        left: 165px;
+        left: 135px;
         background-color: var(--grey);
         padding: 5px 15px 10px;
-        width: 200px;
         font-size: 14px;
+        z-index: 1;
+        width: 150px;
     }
 
     .header-subcategory-item {
@@ -48,6 +49,12 @@ const HeaderCategoryItemContainer = styled.li`
         transform: scale(1.1);
         filter: brightness(1.2);
         transition: .3s;
+    }
+
+    @media only screen and (min-width: 550px) {
+        .header-subcategories-container {
+            left: 165px;
+        }
     }
 `;
 
