@@ -1,26 +1,28 @@
 import Header from "../../components/Header";
 import Carousel from "../../components/Carousel";
+import Shop from "../../components/Shop";
 import LandingPageContainer from "./style";
 import api from '../../services/api';
 import { useEffect, useState } from "react";
 
 const LandingPage = () => {
     const [shopList, setShopList] = useState([]);
-    const carouselList = shopList.slice(0, 5);
-    const bottomList = shopList.slice(0, 10);
 
     useEffect(() => {
         api.get('/products')
         .then (res => {
             const newList = res.data.products;
-            setShopList([...newList]);
+            setShopList(newList);
         });
     }, [])
+
+    console.log('Foi');
 
     return ( 
         <LandingPageContainer className = 'page-container'>
             <Header />
-            <Carousel carouselList = {carouselList}/>
+            <Carousel carouselList = {shopList.slice(0, 5)}/>
+            <Shop list = {shopList.slice(14, 30)}/>
         </LandingPageContainer>
     )
 }

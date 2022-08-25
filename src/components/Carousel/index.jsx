@@ -1,6 +1,6 @@
 import CarouselItem from "../CarouselItem";
 import CarouselContainer from "./style";
-import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
+// import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai';
 
 const Carousel = ({ carouselList }) => {
 
@@ -16,12 +16,12 @@ const Carousel = ({ carouselList }) => {
                 </ul>
             </div>
 
-            <span className = 'carousel-scroll carousel-scroll-left'>
+            {/* <span className = 'carousel-scroll carousel-scroll-left'>
                 <AiOutlineLeft />     
             </span>
             <span className = 'carousel-scroll carousel-scroll-right'>
                 <AiOutlineRight />     
-            </span>
+            </span> */}
         </CarouselContainer>
     )
 }
