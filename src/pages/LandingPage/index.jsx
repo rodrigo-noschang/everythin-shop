@@ -16,13 +16,11 @@ const LandingPage = () => {
         });
     }, [])
 
-    console.log('Foi');
-
     return ( 
         <LandingPageContainer className = 'page-container'>
             <Header />
-            <Carousel carouselList = {shopList.slice(0, 5)}/>
-            <Shop list = {shopList.slice(14, 30)}/>
+            <Carousel carouselList = {shopList.slice(0, 5)} />
+            <Shop list = {shopList.slice(14, 30)} />
         </LandingPageContainer>
     )
 }

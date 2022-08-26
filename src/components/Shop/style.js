@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const ShopContainer = styled.main`
-    width: 100vw;
     padding: 10px;
-    margin-top: 30px;
+    margin: 30px auto 0;
 
     .shop-list-limiter {
         width: 100%;

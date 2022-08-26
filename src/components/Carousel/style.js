@@ -48,7 +48,7 @@ const carouselRoll = keyframes`
 
 
 const CarouselContainer = styled.div`
-    width: 100vw;
+    width: 100%;
     margin: 30px 0;
     background-color: #d4d4d4;
     position: relative;
@@ -56,7 +56,7 @@ const CarouselContainer = styled.div`
     
     .carousel-window {
         max-height: 390px;
-        width: 100vw;
+        width: 100%;
         max-width: 650px;
         margin: 0 auto;
         position: relative;
