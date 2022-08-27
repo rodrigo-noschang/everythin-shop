@@ -1,6 +1,14 @@
+import Modal from "../Modal";
+import ModalItem from "../ModalItem";
 import ShopItemContainer from "./style";
+import { useState } from "react";
 
 const ShopItem = ({ item }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    }
     
     return (
         <ShopItemContainer>
@@ -12,8 +20,17 @@ const ShopItem = ({ item }) => {
                 <h3 className = 'shop-item-name'> {item.title} </h3>
                 <p className = 'shop-item-description'> {item.description} </p>
                 <p className = 'shop-item-price'> {`US$ ${item.price.toFixed(2)}`} </p>
-                <button className = 'shop-item-add-to-cart'> Add to Cart </button>
+                <button className = 'shop-item-add-to-cart'
+                    onClick = {openModal}> 
+                    Add to Cart 
+                </button>
             </div>
+
+            { isModalOpen &&
+                <Modal setIsModalOpen = {setIsModalOpen} >
+                    <ModalItem item = {item}/>    
+                </Modal>
+            }
         </ShopItemContainer>
     )
 
