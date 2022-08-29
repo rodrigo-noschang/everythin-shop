@@ -5,9 +5,11 @@ import {
     AiOutlineShoppingCart}  from 'react-icons/ai';
 import { useState } from "react";
 import HeaderCategoryItem from "../HeaderCategoryItem";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
+    const navigate = useNavigate();
 
     const changeModalStatus = () => {
         setHeaderCategoriesOpen(!headerCategoriesOpen);
@@ -19,6 +21,10 @@ const Header = () => {
         accessories: ['men-watches', 'sunglasses', 'womens-watches', 'womens-bags', 'jewellry', 'skin care', 'fragrances'],
         interiorDesign: ['home-decoration', 'furniture', 'lighting'],
         tech: ['smartphone', 'laptop']
+    }
+
+    const goToCartPage = () => {
+        navigate('/cart');
     }
 
     return (
@@ -44,7 +50,7 @@ const Header = () => {
                 }
             </div>
 
-            <div className = 'header-go-to-cart-container'>
+            <div onClick = { goToCartPage } className = 'header-go-to-cart-container'>
                 <span className = 'header-go-to-cart-cart'> <AiOutlineShoppingCart /> </span>
                 <span className = 'header-go-to-cart-name'> Cart </span>
             </div>

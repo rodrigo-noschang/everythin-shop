@@ -1,10 +1,10 @@
-import { TestProvider } from "./Teste"
+import { CartProvider } from "./Cart";
 
 const Providers = ({ children }) => {
     return (
-        <TestProvider>
+        <CartProvider>
             { children }
-        </TestProvider>
+        </CartProvider>
     )
 }
 

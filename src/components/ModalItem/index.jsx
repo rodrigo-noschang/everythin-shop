@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import ModalItemContainer from "./style";
+import { useCart } from '../../Providers/Cart';
 
 const ModalItem = ({ item }) => {
     const [itemAmount, setItemAmount] = useState(1);
     const [currentImage, setCurrentImage] = useState(item.thumbnail)
+    const { addToCart } = useCart();
 
     const increaseAmount = () => {
         setItemAmount(itemAmount + 1);
@@ -13,6 +15,11 @@ const ModalItem = ({ item }) => {
 
     const decreaseAmount = () => {
         if(itemAmount > 0) setItemAmount(itemAmount - 1);
+    }
+
+    const getAmountAndAddToCart = () => {
+        const itemToCart = {...item, 'amountInCart': itemAmount};
+        addToCart(itemToCart);
     }
 
     return (
@@ -71,7 +78,10 @@ const ModalItem = ({ item }) => {
             </div>
 
             <div className = 'modal-item-add-to-cart-container'>
-                <button className = 'modal-item-add-to-cart'> Add to Cart </button>
+                <button className = 'modal-item-add-to-cart'
+                    onClick = {getAmountAndAddToCart} > 
+                    Add to Cart 
+                </button>
             </div>
 
         </ModalItemContainer>
