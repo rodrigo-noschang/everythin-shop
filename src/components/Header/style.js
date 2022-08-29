@@ -76,6 +76,7 @@ const HeaderContainer = styled.header`
         flex-direction: column;
         order: 1;
         line-height: 15px;
+        cursor: pointer;
     }
 
     .header-go-to-cart-cart {

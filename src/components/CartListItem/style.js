@@ -82,6 +82,7 @@ const CartListItemContainer = styled.li`
             display: flex;
             align-items: center;
             height: 150px;
+            margin-right: 10px;
         }
     }
 
