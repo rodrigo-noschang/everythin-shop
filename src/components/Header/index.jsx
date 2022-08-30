@@ -2,12 +2,13 @@ import HeaderContainer from "./style";
 import { 
     AiOutlineDown, 
     AiOutlineSearch,
-    AiOutlineShoppingCart}  from 'react-icons/ai';
+    AiOutlineShoppingCart,
+    AiFillShopping }  from 'react-icons/ai';
 import { useState } from "react";
 import HeaderCategoryItem from "../HeaderCategoryItem";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ page }) => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -25,6 +26,10 @@ const Header = () => {
 
     const goToCartPage = () => {
         navigate('/cart');
+    }
+    
+    const goToShopPage = () => {
+        navigate('/');
     }
 
     return (
@@ -50,10 +55,17 @@ const Header = () => {
                 }
             </div>
 
-            <div onClick = { goToCartPage } className = 'header-go-to-cart-container'>
-                <span className = 'header-go-to-cart-cart'> <AiOutlineShoppingCart /> </span>
-                <span className = 'header-go-to-cart-name'> Cart </span>
-            </div>
+            {page === 'shop' ?
+                <div onClick = { goToCartPage } className = 'header-go-to-cart-container'>
+                    <span className = 'header-go-to-cart-cart'> <AiOutlineShoppingCart /> </span>
+                    <span className = 'header-go-to-cart-name'> Cart </span>
+                </div>
+                :
+                <div onClick = { goToShopPage } className = 'header-go-to-shop-container'>
+                    <span className = 'header-go-to-shop-shop'> <AiFillShopping /> </span>
+                    <span className = 'header-go-to-shop-name'> Back to Shop </span>
+                </div>
+            }
         </HeaderContainer>
     )
 }

@@ -11,7 +11,7 @@ const CartList = () => {
                 <ul className = 'cart-list-container'>
                     { 
                         cart.map(cartItem => 
-                            <CartListItem cartItem = {cartItem}/>
+                            <CartListItem key = {`cart-${cartItem.id}`} cartItem = {cartItem}/>
                         )
                     }
                 </ul> : 

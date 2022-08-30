@@ -20,7 +20,7 @@ const LandingPage = () => {
 
     return ( 
         <LandingPageContainer className = 'page-container'>
-            <Header />
+            <Header page = 'shop'/>
             <Carousel carouselList = {shopList.slice(0, 5)} />
             <Shop list = {shopList.slice(14, 30)} />
             <BottomList bottomList = {shopList.slice(5, 14)} />

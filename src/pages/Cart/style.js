@@ -38,6 +38,20 @@ const CartPageContainer = styled.div`
             margin-bottom: 0;
         }
     }
+
+    @media only screen and (min-width: 1100px) {
+        .cart-list-and-data-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            margin-top: 30px;
+        }
+
+        .cart-list-container {
+            margin-left: 0;
+            margin-top: 0;
+        }
+    }
 `;
 
 export default CartPageContainer;
