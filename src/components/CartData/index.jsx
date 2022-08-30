@@ -1,7 +1,7 @@
 import { useCart } from "../../Providers/Cart";
 import CartDataContainer from "./style";
 
-const CartData = () => {
+const CartData = ({ discount }) => {
     const { cart } = useCart();
     
     return (

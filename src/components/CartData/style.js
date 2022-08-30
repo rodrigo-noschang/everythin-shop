@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const CartDataContainer = styled.section`
     background-color: #ccc;
     padding: 5px;
+    width: 100%;
     max-width: 350px;
     margin: 0 auto;
 
