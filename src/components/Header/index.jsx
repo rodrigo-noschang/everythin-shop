@@ -7,21 +7,24 @@ import {
 import { useState } from "react";
 import HeaderCategoryItem from "../HeaderCategoryItem";
 import { useNavigate } from "react-router-dom";
+import { useCategoryFilter } from "../../Providers/CategoryFilter";
 
 const Header = ({ page }) => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
     const navigate = useNavigate();
+    const { setCategoryFilter } = useCategoryFilter();
 
     const changeModalStatus = () => {
         setHeaderCategoriesOpen(!headerCategoriesOpen);
     }
 
     const subCategories = {
-        womensClothing: ['women-dresses', 'women-shoe'],
-        mensClothing: ['men-shirt', 'men-shoe'],
-        accessories: ['men-watches', 'sunglasses', 'womens-watches', 'womens-bags', 'jewellry', 'skin care', 'fragrances'],
+        initial: ['normal-shop'],
+        womensClothing: ['womens-dresses', 'womens-shoes'],
+        mensClothing: ['mens-shirts', 'mens-shoes'],
+        accessories: ['mens-watches', 'sunglasses', 'womens-watches', 'womens-bags', 'womens-jewellery', 'skincare', 'fragrances'],
         interiorDesign: ['home-decoration', 'furniture', 'lighting'],
-        tech: ['smartphone', 'laptop']
+        tech: ['smartphones', 'laptops']
     }
 
     const goToCartPage = () => {
@@ -29,6 +32,7 @@ const Header = ({ page }) => {
     }
     
     const goToShopPage = () => {
+        setCategoryFilter('');
         navigate('/');
     }
 
@@ -46,11 +50,12 @@ const Header = ({ page }) => {
 
                 {headerCategoriesOpen && 
                     <ul className = 'header-categories-container'>
-                        <HeaderCategoryItem key = {'key-1'} subCategories = {subCategories.womensClothing}> Women's Clothing </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-2'} subCategories = {subCategories.mensClothing}> Men's Clothing </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-3'} subCategories = {subCategories.accessories}> Accessories </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-4'} subCategories = {subCategories.interiorDesign}> Interior Design </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-5'} subCategories = {subCategories.tech}> Tech </HeaderCategoryItem>
+                        <HeaderCategoryItem key = {'key-1'} subCategories = {subCategories.initial}> Initial Shop </HeaderCategoryItem>
+                        <HeaderCategoryItem key = {'key-2'} subCategories = {subCategories.womensClothing}> Women's Clothing </HeaderCategoryItem>
+                        <HeaderCategoryItem key = {'key-3'} subCategories = {subCategories.mensClothing}> Men's Clothing </HeaderCategoryItem>
+                        <HeaderCategoryItem key = {'key-4'} subCategories = {subCategories.accessories}> Accessories </HeaderCategoryItem>
+                        <HeaderCategoryItem key = {'key-5'} subCategories = {subCategories.interiorDesign}> Interior Design </HeaderCategoryItem>
+                        <HeaderCategoryItem key = {'key-6'} subCategories = {subCategories.tech}> Tech </HeaderCategoryItem>
                     </ul>
                 }
             </div>

@@ -22,7 +22,9 @@ const ModalItem = ({ setIsModalOpen, item }) => {
         const itemToCart = {...item, 'amountInCart': itemAmount};
         addToCart(itemToCart);
         setIsModalOpen(false);
-        toast.success("Item added to Cart!");
+        toast.success("Item added to Cart!", {
+            position: 'top-left'
+        });
     }
 
     return (

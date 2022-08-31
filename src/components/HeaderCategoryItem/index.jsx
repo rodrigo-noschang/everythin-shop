@@ -1,9 +1,17 @@
 import { AiOutlineRight } from 'react-icons/ai'
 import HeaderCategoryItemContainer from './style';
 import { useState } from 'react';
+import { useCategoryFilter } from '../../Providers/CategoryFilter';
 
 const HeaderCategoryItem = ({children, subCategories}) => {
     const [isSubcategoriesOpen, setIsSubcategoriesOpen] = useState(false);
+    const { setCategoryFilter } = useCategoryFilter();
+
+    const showCategory = evt => {
+        let selectedCategory = evt.target.innerText;
+        if (selectedCategory === 'normal-shop') selectedCategory = '';
+        setCategoryFilter(selectedCategory);
+    }
 
     const showSubCategories = () => {
         setIsSubcategoriesOpen(true);
@@ -20,7 +28,7 @@ const HeaderCategoryItem = ({children, subCategories}) => {
             {isSubcategoriesOpen && 
                 <ul className = 'header-subcategories-container'>
                     {subCategories.map(subCategory =>
-                        <li key = {subCategory} className = 'header-subcategory-item'>
+                        <li onClick = {showCategory} key = {subCategory} className = 'header-subcategory-item'>
                             {subCategory}
                         </li>
                         )

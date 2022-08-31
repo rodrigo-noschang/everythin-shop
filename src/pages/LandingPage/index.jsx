@@ -6,14 +6,16 @@ import Footer from "../../components/Footer";
 import LandingPageContainer from "./style";
 import api from '../../services/api';
 import { useEffect, useState } from "react";
+import { useCategoryFilter } from "../../Providers/CategoryFilter";
 
 const LandingPage = () => {
     const [shopList, setShopList] = useState([]);
     const [apiSkipCounter, setApiSkipCounter] = useState(1)
     const [areImagesLoaded, setAreImagesLoaded] = useState(false);
+    const { categoryFilter } = useCategoryFilter();
 
     useEffect(() => {
-        api.get('/products')
+        api.get('/products?skip=0&limit=100')
         .then (res => {
             const newList = res.data.products;
             setShopList(newList);
@@ -21,10 +23,6 @@ const LandingPage = () => {
     }, [])
 
     const loadMoreProducts = () => {
-        api.get(`/products?skip=${apiSkipCounter * 30}&limit=30`)
-            .then(res => {
-                setShopList([...shopList, ...res.data.products]);
-        });
         setApiSkipCounter(apiSkipCounter + 1);
     }
 
@@ -37,8 +35,16 @@ const LandingPage = () => {
             { areImagesLoaded &&
                 <Carousel carouselList = {shopList.slice(0, 5)} />
             }
-            <Shop setAreImagesLoaded = {setAreImagesLoaded} list = { shopList.slice(14, shopList.length)} />
-            { apiSkipCounter < 4 && areImagesLoaded &&
+            <Shop 
+                setAreImagesLoaded = {setAreImagesLoaded} 
+                list = {
+                    30 * apiSkipCounter < 100 ?
+                        shopList.slice(14, 30 * apiSkipCounter)
+                    :
+                        shopList.slice(14, 100)
+                } 
+                fullList = { shopList.slice(0, 100) }/>
+            { apiSkipCounter < 4 && areImagesLoaded && categoryFilter === ''  &&
                 <p onClick = {loadMoreProducts} className = 'landing-page-load-more'> Load More Products </p>
             }
             { areImagesLoaded &&

@@ -1,9 +1,12 @@
 import { CartProvider } from "./Cart";
+import { CategoryFilterProvider } from "./CategoryFilter";
 
 const Providers = ({ children }) => {
     return (
         <CartProvider>
-            { children }
+            <CategoryFilterProvider>
+                { children }
+            </CategoryFilterProvider>
         </CartProvider>
     )
 }
