@@ -28,7 +28,7 @@ const BottomListItem = ({ item }) => {
 
             { isModalOpen &&
                 <Modal setIsModalOpen = {setIsModalOpen} >
-                    <ModalItem item = {item}/>    
+                    <ModalItem setIsModalOpen = {setIsModalOpen} item = {item}/>    
                 </Modal>
             }
         </BottomListItemContainer>
