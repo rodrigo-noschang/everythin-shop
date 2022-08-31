@@ -5,11 +5,13 @@ const Shop = ({ list }) => {
 
     return (
         <ShopContainer className = 'shop-list-container'>
-            <ul className = 'shop-list-limiter'>
-                { list.map(item => 
-                    <ShopItem key = {item.id} item = {item}/>
-                )}
-            </ul>
+            { list.length > 0 &&
+                <ul className = 'shop-list-limiter'>
+                    { list.map(item => 
+                        <ShopItem key = {item.id} item = {item}/>
+                    )}
+                </ul>
+            }
         </ShopContainer>
     )
 }

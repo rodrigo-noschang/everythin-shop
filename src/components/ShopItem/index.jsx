@@ -22,7 +22,7 @@ const ShopItem = ({ item }) => {
                 <p className = 'shop-item-price'> {`US$ ${item.price.toFixed(2)}`} </p>
                 <button className = 'shop-item-add-to-cart'
                     onClick = {openModal}> 
-                    Add to Cart 
+                    View product
                 </button>
             </div>
 

@@ -31,6 +31,9 @@ const ShopItemContainer = styled.li`
         margin: 8px 0;
         font-size: 13px;
         color: var(--grey);
+        max-height: 60px; 
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .shop-item-price {
