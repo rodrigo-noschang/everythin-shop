@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
         --grey: #3b4344;
         --rating-green: #4DAC68;
         --shadow-grey: #a4a4a4;
+        --discount-green: #1f771f;
     }
 
     html, body, h1, h2, h3, header, button, input, svg, figure, img, div, main, section, ul, li, footer, a, p, span {

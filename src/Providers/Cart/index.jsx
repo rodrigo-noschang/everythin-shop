@@ -5,7 +5,6 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
-
     const addToCart = newItem => {
         const itemInCart = cart.find(item => item.id === newItem.id);
         if (!itemInCart) {
@@ -24,8 +23,16 @@ export const CartProvider = ({ children }) => {
         setCart(updatedCart);
     }
 
+    const updateItemAmount = (newAmount, cartItem) => {
+        const updatedItem = { ...cartItem, 'amountInCart': newAmount };
+        const itemIndex = cart.findIndex(item => item.id === cartItem.id);
+
+        cart.splice(itemIndex, 1, updatedItem);
+        setCart([...cart]);
+    }
+
     return(
-        <CartContext.Provider value = {{cart, addToCart, removeFromCart}}>
+        <CartContext.Provider value = {{cart, addToCart, removeFromCart, updateItemAmount}}>
             { children }
         </CartContext.Provider>
     )

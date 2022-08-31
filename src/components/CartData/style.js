@@ -30,9 +30,16 @@ const CartDataContainer = styled.section`
         font-weight: bold;
     }
 
+    .cart-data-item-price-discount {
+        color: var(--discount-green);
+    }
+
     .cart-data-total {
         text-align: center;
         font-size: 18px;
+        margin: 20px auto 0;
+        padding-top: 5px;
+        border-top: 2px solid var(--purple);
     }
 
     .cart-data-total-text {
@@ -41,6 +48,10 @@ const CartDataContainer = styled.section`
 
     .cart-data-total-value {
         font-size: 16px;
+    }
+
+    .cart-data-total-value-discount {
+        color: var(--discount-green);
     }
 `;
 

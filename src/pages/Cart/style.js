@@ -24,6 +24,7 @@ const CartPageContainer = styled.div`
         padding: 5px 25px;
         font-weight: bold;
         font-size: 18px;
+        cursor: pointer;
     }
 
     .cart-data-container {
@@ -57,20 +58,30 @@ const CartPageContainer = styled.div`
         border: none;
         margin-left: 5px;
         outline: none;
+        flex-grow: 1;
+    }
+
+    .cart-discount-invalid-coupon-message {
+        font-size: 11px;
+        color: red;
+        font-style: italic;
+        margin-bottom: 5px;
     }
 
     .cart-discount-generate-button {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        border: 1px solid black;
-        padding: 5px;
+        padding: 10px 15px;
         font-size: 15px;
         cursor: pointer;
+        background-color: var(--purple);
+        color: var(--yellow);
+        border: none;
     }
 
     .cart-discount-generate-button > svg {
-        color: var(--grey);
+        color: var(--yellow);
     }
 
     .cart-discount-hint {

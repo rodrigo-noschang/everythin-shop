@@ -2,21 +2,28 @@ import { useState } from 'react';
 import CartListItemContainer from './style';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill } from 'react-icons/bs';
+import { useCart } from '../../Providers/Cart';
 
 const CartListItem = ({ cartItem }) => {
     const [itemAmount, setItemAmount] = useState(cartItem.amountInCart);
+    const { updateItemAmount, removeFromCart } = useCart();
 
-    
     const increaseAmount = () => {
         setItemAmount(itemAmount + 1);
         cartItem.amountInCart = itemAmount + 1;
+        updateItemAmount(itemAmount + 1, cartItem);
     }
 
     const decreaseAmount = () => {
-        if(itemAmount > 0) {
+        if(itemAmount > 1) {
             setItemAmount(itemAmount - 1);
             cartItem.amountInCart = itemAmount - 1;
+            updateItemAmount(itemAmount - 1, cartItem);
         }
+    }
+
+    const removeItem = () => {
+        removeFromCart(cartItem);
     }
 
     return(
@@ -45,7 +52,7 @@ const CartListItem = ({ cartItem }) => {
                             </p>
                         </div>
 
-                        <p className = 'cart-item-remove-container'>
+                        <p onClick = { removeItem } className = 'cart-item-remove-container'>
                             <BsFillTrashFill />
                             <span className = 'cart-item-remove'> Remove from Cart </span>
                         </p>
