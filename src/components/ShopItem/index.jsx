@@ -3,17 +3,24 @@ import ModalItem from "../ModalItem";
 import ShopItemContainer from "./style";
 import { useState } from "react";
 
-const ShopItem = ({ item }) => {
+const ShopItem = ({ setAreImagesLoaded, item }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
     }
     
+    const allowRendering = () => {
+        setAreImagesLoaded(true);
+    }
+
     return (
         <ShopItemContainer>
             <figure className = 'shop-item-figure'>
-                <img className = 'shop-item-image' src = {item.thumbnail} alt = {item.description} />
+                <img className = 'shop-item-image' 
+                    src = {item.thumbnail} 
+                    alt = {item.description} 
+                    onLoad = {allowRendering}/>
             </figure>
 
             <div className = 'shop-item-info-container'>
@@ -28,7 +35,7 @@ const ShopItem = ({ item }) => {
 
             { isModalOpen &&
                 <Modal setIsModalOpen = {setIsModalOpen} >
-                    <ModalItem item = {item}/>    
+                    <ModalItem setIsModalOpen = {setIsModalOpen} item = {item}/>    
                 </Modal>
             }
         </ShopItemContainer>

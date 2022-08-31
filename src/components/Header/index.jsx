@@ -34,7 +34,7 @@ const Header = ({ page }) => {
 
     return (
         <HeaderContainer>
-            <h1 className = 'header-title'> Everythin' Shop </h1>
+            <h1 onClick = {goToShopPage} className = 'header-title'> Everythin' Shop </h1>
 
             <div className = 'header-input-container'>
                 <div onClick = {changeModalStatus} className = 'header-search-filter'>

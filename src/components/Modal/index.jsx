@@ -13,7 +13,7 @@ const Modal = ({ children, setIsModalOpen }) => {
     return (
         <ModalContainer className = 'modal-container' onClick={hideModal}>
             <div className = 'modal-content-wrapper'>
-                {children}
+                {children }
             </div>
         </ModalContainer>
     )

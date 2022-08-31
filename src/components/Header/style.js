@@ -19,6 +19,7 @@ const HeaderContainer = styled.header`
         text-decoration: underline;
         font-size: 24px;
         order: 1;
+        cursor: pointer;
     }
 
     .header-input-container {

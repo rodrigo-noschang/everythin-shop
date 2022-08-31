@@ -3,8 +3,9 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import ModalItemContainer from "./style";
 import { useCart } from '../../Providers/Cart';
+import { toast } from 'react-toastify';
 
-const ModalItem = ({ item }) => {
+const ModalItem = ({ setIsModalOpen, item }) => {
     const [itemAmount, setItemAmount] = useState(1);
     const [currentImage, setCurrentImage] = useState(item.thumbnail)
     const { addToCart } = useCart();
@@ -20,6 +21,8 @@ const ModalItem = ({ item }) => {
     const getAmountAndAddToCart = () => {
         const itemToCart = {...item, 'amountInCart': itemAmount};
         addToCart(itemToCart);
+        setIsModalOpen(false);
+        toast.success("Item added to Cart!");
     }
 
     return (

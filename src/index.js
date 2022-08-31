@@ -6,6 +6,9 @@ import GlobalStyle from './styles/reset';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './router';
 import Providers from './Providers';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +16,7 @@ root.render(
     <Providers>
       <BrowserRouter>
         <GlobalStyle />
+        <ToastContainer />
         <Router />
       </BrowserRouter>
     </Providers>  
