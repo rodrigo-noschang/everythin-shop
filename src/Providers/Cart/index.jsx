@@ -24,10 +24,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const updateItemAmount = (newAmount, cartItem) => {
-        const updatedItem = { ...cartItem, 'amountInCart': newAmount };
-        const itemIndex = cart.findIndex(item => item.id === cartItem.id);
-
-        cart.splice(itemIndex, 1, updatedItem);
+        cartItem.amountInCart = newAmount;
         setCart([...cart]);
     }
 
