@@ -8,11 +8,13 @@ import { useState } from "react";
 import HeaderCategoryItem from "../HeaderCategoryItem";
 import { useNavigate } from "react-router-dom";
 import { useCategoryFilter } from "../../Providers/CategoryFilter";
+import { useSearchShop } from "../../Providers/SearchShop";
 
 const Header = ({ page }) => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
     const navigate = useNavigate();
     const { setCategoryFilter } = useCategoryFilter();
+    const { setSearchInput, searchInput } = useSearchShop();
 
     const changeModalStatus = () => {
         setHeaderCategoriesOpen(!headerCategoriesOpen);
@@ -36,6 +38,11 @@ const Header = ({ page }) => {
         navigate('/');
     }
 
+    const updateSearchInput = evt => {
+        setSearchInput(evt.target.value);
+        setCategoryFilter('');
+    }
+
     return (
         <HeaderContainer>
             <h1 onClick = {goToShopPage} className = 'header-title'> Everythin' Shop </h1>
@@ -45,8 +52,13 @@ const Header = ({ page }) => {
                     <span className = 'header-search-filter-selected'> All </span>
                     <span className = 'header-search-filter-arrow'> <AiOutlineDown /> </span>
                 </div>
-                <input className = 'header-search-input' placeholder = 'Your search here'/>
-                <button className = 'header-search-search'> <AiOutlineSearch /> </button>
+                <input className = 'header-search-input' 
+                    placeholder = 'Your search here' 
+                    onChange = {updateSearchInput}
+                    value = {searchInput} />
+                <button className = 'header-search-search'> 
+                    <AiOutlineSearch /> 
+                </button>
 
                 {headerCategoriesOpen && 
                     <ul className = 'header-categories-container'>

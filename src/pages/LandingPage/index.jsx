@@ -7,12 +7,14 @@ import LandingPageContainer from "./style";
 import api from '../../services/api';
 import { useEffect, useState } from "react";
 import { useCategoryFilter } from "../../Providers/CategoryFilter";
+import { useSearchShop } from "../../Providers/SearchShop";
 
 const LandingPage = () => {
     const [shopList, setShopList] = useState([]);
     const [apiSkipCounter, setApiSkipCounter] = useState(1)
     const [areImagesLoaded, setAreImagesLoaded] = useState(false);
     const { categoryFilter } = useCategoryFilter();
+    const { searchInput } = useSearchShop();
 
     useEffect(() => {
         api.get('/products?skip=0&limit=100')
@@ -44,7 +46,7 @@ const LandingPage = () => {
                         shopList.slice(14, 100)
                 } 
                 fullList = { shopList.slice(0, 100) }/>
-            { apiSkipCounter < 4 && areImagesLoaded && categoryFilter === ''  &&
+            { apiSkipCounter < 4 && areImagesLoaded && categoryFilter === ''  && searchInput === '' &&
                 <p onClick = {loadMoreProducts} className = 'landing-page-load-more'> Load More Products </p>
             }
             { areImagesLoaded &&

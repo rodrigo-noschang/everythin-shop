@@ -2,15 +2,18 @@ import { AiOutlineRight } from 'react-icons/ai'
 import HeaderCategoryItemContainer from './style';
 import { useState } from 'react';
 import { useCategoryFilter } from '../../Providers/CategoryFilter';
+import { useSearchShop } from '../../Providers/SearchShop';
 
 const HeaderCategoryItem = ({children, subCategories}) => {
     const [isSubcategoriesOpen, setIsSubcategoriesOpen] = useState(false);
     const { setCategoryFilter } = useCategoryFilter();
+    const { setSearchInput } = useSearchShop();
 
     const showCategory = evt => {
         let selectedCategory = evt.target.innerText;
         if (selectedCategory === 'normal-shop') selectedCategory = '';
         setCategoryFilter(selectedCategory);
+        setSearchInput('');
     }
 
     const showSubCategories = () => {
