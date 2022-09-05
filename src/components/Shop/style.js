@@ -12,6 +12,11 @@ const ShopContainer = styled.main`
         justify-content: center;
         margin: 0 auto;
     }
+
+    .shop-list-nothing-found {
+        font-size: 26px;
+        font-style: italic;
+    }
 `;
 
 export default ShopContainer;

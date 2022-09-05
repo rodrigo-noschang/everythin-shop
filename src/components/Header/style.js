@@ -52,6 +52,14 @@ const HeaderContainer = styled.header`
         flex-grow: 1;
     }
 
+    .header-search-filter-clear-container {
+        background-color: #FFF;
+        color: black;
+        align-self: center;
+        line-height: 33px;
+        cursor: pointer;
+    }
+
     .header-search-search {
         border: none;
         background-color: var(--yellow);

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const CartListContainer = styled.section`
-
     .cart-list-container {
         display: flex;
         flex-direction: column;

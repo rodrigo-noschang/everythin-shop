@@ -34,7 +34,7 @@ const CartPageContainer = styled.div`
     }
 
     .cart-discount-container {
-        margin: 20px 0;
+        margin: 0 0 20px;
     }
 
     .cart-discount-ask {
@@ -97,6 +97,18 @@ const CartPageContainer = styled.div`
         font-style: italic;
         font-weight: bold;
         color: var(--grey);
+    }
+
+    .cart-section-close-order-bottom {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .cart-section-close-order-empty-cart {
+        color: red;
+        font-size: 12px;
+        margin-top: 10px;
+        text-align: center;
     }
 
     @media only screen and (min-width: 550px) {

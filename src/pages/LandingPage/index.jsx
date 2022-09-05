@@ -10,18 +10,24 @@ import { useCategoryFilter } from "../../Providers/CategoryFilter";
 import { useSearchShop } from "../../Providers/SearchShop";
 
 const LandingPage = () => {
-    const [shopList, setShopList] = useState([]);
+    const [shopList, setShopList] = useState(
+        JSON.parse(localStorage.getItem('everythin-shop:list')) || []
+    );
     const [apiSkipCounter, setApiSkipCounter] = useState(1)
     const [areImagesLoaded, setAreImagesLoaded] = useState(false);
     const { categoryFilter } = useCategoryFilter();
     const { searchInput } = useSearchShop();
 
     useEffect(() => {
-        api.get('/products?skip=0&limit=100')
-        .then (res => {
-            const newList = res.data.products;
-            setShopList(newList);
-        });
+        if (shopList.length === 0) {
+            console.log('Chamou');
+            api.get('/products?skip=0&limit=100')
+            .then (res => {
+                const newList = res.data.products;
+                setShopList(newList);
+                localStorage.setItem('everythin-shop:list', JSON.stringify(newList));
+            });
+        }
     }, [])
 
     const loadMoreProducts = () => {

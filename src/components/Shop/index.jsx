@@ -18,8 +18,6 @@ const Shop = ({ setAreImagesLoaded, list, fullList }) => {
         :
         [];
 
-        console.log(filteredList);
-
     return (
         <ShopContainer className = 'shop-list-container'>
             { list.length > 0 &&
@@ -29,9 +27,13 @@ const Shop = ({ setAreImagesLoaded, list, fullList }) => {
                             <ShopItem setAreImagesLoaded = {setAreImagesLoaded} key = {item.id} item = {item}/>
                         )
                         : 
-                        filteredList.length > 0 && filteredList.map(item => 
+                        filteredList.length > 0 ? filteredList.map(item => 
                             <ShopItem setAreImagesLoaded = {setAreImagesLoaded} key = {item.id} item = {item}/>
                         )
+                        :
+                        <p className = 'shop-list-nothing-found'>
+                            No items found. 
+                        </p>
                     }
                 </ul>
             }

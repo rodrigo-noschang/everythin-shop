@@ -5,7 +5,7 @@ const CartDataContainer = styled.section`
     padding: 5px;
     width: 100%;
     max-width: 350px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
 
     .cart-data-item-container {
         margin: 10px 0;

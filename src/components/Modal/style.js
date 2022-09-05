@@ -39,7 +39,6 @@ const ModalContainer = styled.div`
     .modal-content-wrapper { 
         position: absolute;
         background-color: #fff;
-        padding: 10px;
         margin: 0 10px;
         opacity: 1;
         z-index: 3;

@@ -3,7 +3,8 @@ import {
     AiOutlineDown, 
     AiOutlineSearch,
     AiOutlineShoppingCart,
-    AiFillShopping }  from 'react-icons/ai';
+    AiFillShopping, 
+    AiOutlineClose }  from 'react-icons/ai';
 import { useState } from "react";
 import HeaderCategoryItem from "../HeaderCategoryItem";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +44,10 @@ const Header = ({ page }) => {
         setCategoryFilter('');
     }
 
+    const resetSearchInput = () => {
+        setSearchInput('');
+    }
+
     return (
         <HeaderContainer>
             <h1 onClick = {goToShopPage} className = 'header-title'> Everythin' Shop </h1>
@@ -56,6 +61,13 @@ const Header = ({ page }) => {
                     placeholder = 'Your search here' 
                     onChange = {updateSearchInput}
                     value = {searchInput} />
+
+                { searchInput &&
+                <div onClick = {resetSearchInput} className = 'header-search-filter-clear-container'>
+                    <AiOutlineClose className = 'header-search-filter-clear'/>
+                </div>
+                }
+
                 <button className = 'header-search-search'> 
                     <AiOutlineSearch /> 
                 </button>

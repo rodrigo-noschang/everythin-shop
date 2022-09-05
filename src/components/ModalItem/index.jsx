@@ -15,7 +15,7 @@ const ModalItem = ({ setIsModalOpen, item }) => {
     }
 
     const decreaseAmount = () => {
-        if(itemAmount > 0) setItemAmount(itemAmount - 1);
+        if(itemAmount > 1) setItemAmount(itemAmount - 1);
     }
 
     const getAmountAndAddToCart = () => {
