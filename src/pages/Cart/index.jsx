@@ -19,7 +19,7 @@ const Cart = () => {
         JSON.parse(localStorage.getItem('everythin-shop:token')) || ''
     )
     const { isOrderClosed, setIsOrderClosed } = useOrderClosed();
-    const { cart } = useCart();
+    const { cart, resetCart } = useCart();
 
     const updateCouponValue = evt => {
         setCouponValue(evt.target.value);
@@ -48,6 +48,11 @@ const Cart = () => {
         }
     }
 
+    const enableShopping = () => {
+        resetCart();
+        setIsOrderClosed(false);
+    }
+
     return (
         <CartPageContainer>
             <Header page = 'cart'/>
@@ -55,8 +60,11 @@ const Cart = () => {
                 <header className = 'cart-section-header'>
                     <h2 className = 'cart-section-title'> Shopping Cart </h2>
                     <div>
-                        {isOrderClosed ? 
-                            <button disabled className = 'cart-section-order-closed-button'> Order Closed </button>
+                        {isOrderClosed ?
+                            <div className = 'cart-section-order-status-container'> 
+                                <button onClick = {enableShopping} className = 'cart-section-open-new-order'> Open New Order </button>
+                                <button disabled className = 'cart-section-order-closed-button'> Order Closed </button>
+                            </div>
                             :
                             <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-top'> Close Order </button>    
                         }

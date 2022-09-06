@@ -17,6 +17,20 @@ const CartPageContainer = styled.div`
         margin-bottom: 10px;
     }
 
+    .cart-section-order-status-container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .cart-section-open-new-order {
+        border: none;
+        color: var(--yellow);
+        background-color: var(--purple);
+        font-weight: bold;
+        padding: 5px 15px;
+        cursor: pointer;
+    }
+
     .cart-section-order-closed-button {
         border: none;
         padding: 5px 15px;
@@ -24,7 +38,6 @@ const CartPageContainer = styled.div`
         font-weight: bold;
         cursor: not-allowed;
         display: block;
-        margin: 0 auto;
     }
 
     .cart-section-close-order {
@@ -131,6 +144,10 @@ const CartPageContainer = styled.div`
 
         .cart-section-title {
             margin-bottom: 0;
+        }
+
+        .cart-section-order-closed-button {
+            margin: 0 0 0 15px;
         }
     }
 
