@@ -29,7 +29,6 @@ const LoginWindowContainer = styled.div`
     .login-window-input-container {
         display: flex;
         justify-content: space-between;
-        margin: 15px 0;
     }
 
     .login-window-input-label {
@@ -41,7 +40,14 @@ const LoginWindowContainer = styled.div`
     }
 
     .login-window-password-input {
-        margin-bottom: 25px;
+        margin-top: 15px;
+    }
+
+    .login-window-input-empty, .login-window-input-failed-login {
+        color: red;
+        font-size: 12px;
+        font-style: italic;
+        margin: 0;
     }
 
     .login-window-button-submit {
@@ -52,6 +58,8 @@ const LoginWindowContainer = styled.div`
         font-size: 17px;
         padding: 5px 20px;
         cursor: pointer;
+        display: block;
+        margin: 10px auto 0;
     }
 
     .login-window-first-message {

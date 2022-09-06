@@ -81,6 +81,16 @@ const ModalItemContainer = styled.div`
         margin: 10px 0;
     }
 
+    .modal-item-blocked-button {
+        border: none;
+        padding: 5px 15px;
+        background-color: #ccc;
+        font-weight: bold;
+        cursor: not-allowed;
+        display: block;
+        margin: 0 auto;
+    }
+
     @media only screen and (min-width: 525px) {
         height: auto;
         overflow-y: initial;

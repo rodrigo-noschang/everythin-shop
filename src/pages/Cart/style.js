@@ -17,6 +17,16 @@ const CartPageContainer = styled.div`
         margin-bottom: 10px;
     }
 
+    .cart-section-order-closed-button {
+        border: none;
+        padding: 5px 15px;
+        background-color: #ccc;
+        font-weight: bold;
+        cursor: not-allowed;
+        display: block;
+        margin: 0 auto;
+    }
+
     .cart-section-close-order {
         border: none;
         background-color: var(--purple);

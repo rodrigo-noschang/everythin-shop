@@ -3,10 +3,12 @@ import CartListItemContainer from './style';
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill } from 'react-icons/bs';
 import { useCart } from '../../Providers/Cart';
+import { useOrderClosed } from '../../Providers/OrderClosed';
 
 const CartListItem = ({ cartItem }) => {
     const [itemAmount, setItemAmount] = useState(cartItem.amountInCart);
     const { updateItemAmount, removeFromCart } = useCart();
+    const { isOrderClosed } = useOrderClosed();
 
     const increaseAmount = () => {
         setItemAmount(itemAmount + 1);
@@ -15,15 +17,13 @@ const CartListItem = ({ cartItem }) => {
     }
 
     const decreaseAmount = () => {
-        if(itemAmount > 1) {
-            setItemAmount(itemAmount - 1);
-            cartItem.amountInCart = itemAmount - 1;
-            updateItemAmount(itemAmount - 1, cartItem);
-        }
+        setItemAmount(itemAmount - 1);
+        cartItem.amountInCart = itemAmount - 1;
+        updateItemAmount(itemAmount - 1, cartItem);
     }
 
     const removeItem = () => {
-        removeFromCart(cartItem);
+        if (!isOrderClosed) removeFromCart(cartItem);
     }
 
     return(
@@ -42,13 +42,15 @@ const CartListItem = ({ cartItem }) => {
                         <div className = 'cart-item-amount-container'>
                             <p className = 'cart-item-amount-pre'> Amount </p>
                             <p className = 'cart-item-amount-info-container'>
-                                <AiOutlineMinus 
+                                {!isOrderClosed && <AiOutlineMinus 
                                     className = 'cart-item-amount-change cart-item-amount-minus'
                                     onClick = {decreaseAmount}/>
+                                }
                                 <span className = 'cart-item-amount-value'> {itemAmount} </span>
-                                <AiOutlinePlus 
+                                {!isOrderClosed && <AiOutlinePlus 
                                     className = 'cart-item-amount-change cart-item-amount-plus'
                                     onClick = {increaseAmount}/>
+                                }
                             </p>
                         </div>
 

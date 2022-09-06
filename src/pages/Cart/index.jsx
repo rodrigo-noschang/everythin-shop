@@ -7,12 +7,18 @@ import { useState } from "react";
 import { useCart } from "../../Providers/Cart";
 import Modal from '../../components/Modal';
 import LoginWindow from "../../components/LoginWindow";
+import { useOrderClosed } from '../../Providers/OrderClosed'
+import { toast } from "react-toastify";
 
 const Cart = () => {
     const [isCouponValid, setIsCouponValid] = useState('');
     const [couponValue, setCouponValue] = useState('');
     const [loginModal, setLoginModal] = useState(false);
     const [emptyCart, setEmptyCart] = useState(false);
+    const [userToken, setUserToken] = useState(
+        JSON.parse(localStorage.getItem('everythin-shop:token')) || ''
+    )
+    const { isOrderClosed, setIsOrderClosed } = useOrderClosed();
     const { cart } = useCart();
 
     const updateCouponValue = evt => {
@@ -30,10 +36,15 @@ const Cart = () => {
     }
 
     const openLoginModal = () => {
-        if (cart.length > 0) {
+        if (!userToken) {
             setLoginModal(true);
         } else {
-            setEmptyCart(true);
+            if (cart.length > 0) {
+                setIsOrderClosed(true);
+                toast.success('Your order was successfully closed');
+            } else {
+                setEmptyCart(true);
+            }
         }
     }
 
@@ -44,7 +55,11 @@ const Cart = () => {
                 <header className = 'cart-section-header'>
                     <h2 className = 'cart-section-title'> Shopping Cart </h2>
                     <div>
-                        <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-top'> Close Order </button>    
+                        {isOrderClosed ? 
+                            <button disabled className = 'cart-section-order-closed-button'> Order Closed </button>
+                            :
+                            <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-top'> Close Order </button>    
+                        }
                         { emptyCart && 
                             <p className = 'cart-section-close-order-empty-cart'> Add an item to your cart, so that you can close your order. </p>
                         }
@@ -95,7 +110,11 @@ const Cart = () => {
                             <CartData discount/>
                         }
 
-                        <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-bottom'> Close Order </button>
+                        {isOrderClosed ? 
+                            <button disabled className = 'cart-section-order-closed-button'> Order Closed </button>
+                            :
+                            <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-bottom'> Close Order </button>
+                        }
                         { emptyCart && 
                             <p className = 'cart-section-close-order-empty-cart'> Add an item to your cart, so that you can close your order. </p>
                         }
@@ -105,7 +124,7 @@ const Cart = () => {
             </div>
             { loginModal && 
             <Modal setIsModalOpen = {setLoginModal}>
-                <LoginWindow />
+                <LoginWindow setIsModalOpen = {setLoginModal} setUserToken = {setUserToken}/>
             </Modal>
             }
         </CartPageContainer>

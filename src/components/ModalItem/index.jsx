@@ -4,18 +4,20 @@ import { BsStarFill, BsStarHalf } from 'react-icons/bs'
 import ModalItemContainer from "./style";
 import { useCart } from '../../Providers/Cart';
 import { toast } from 'react-toastify';
+import { useOrderClosed } from '../../Providers/OrderClosed';
 
 const ModalItem = ({ setIsModalOpen, item }) => {
     const [itemAmount, setItemAmount] = useState(1);
     const [currentImage, setCurrentImage] = useState(item.thumbnail)
     const { addToCart } = useCart();
+    const { isOrderClosed } = useOrderClosed();
 
     const increaseAmount = () => {
-        setItemAmount(itemAmount + 1);
+        if (!isOrderClosed) setItemAmount(itemAmount + 1);
     }
 
     const decreaseAmount = () => {
-        if(itemAmount > 1) setItemAmount(itemAmount - 1);
+        if(itemAmount > 1 && !isOrderClosed) setItemAmount(itemAmount - 1);
     }
 
     const getAmountAndAddToCart = () => {
@@ -83,10 +85,13 @@ const ModalItem = ({ setIsModalOpen, item }) => {
             </div>
 
             <div className = 'modal-item-add-to-cart-container'>
+                {isOrderClosed ? 
+                    <button disabled className = 'modal-item-blocked-button'> Order Closed </button>
+                :
                 <button className = 'modal-item-add-to-cart'
                     onClick = {getAmountAndAddToCart} > 
                     Add to Cart 
-                </button>
+                </button>}
             </div>
 
         </ModalItemContainer>

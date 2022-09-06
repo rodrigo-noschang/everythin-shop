@@ -1,6 +1,36 @@
 import LoginWindowContainer from "./style";
+import { useForm } from "react-hook-form";
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import api from '../../services/api';
+import { toast } from "react-toastify";
+import { useState } from "react";
 
-const LoginWindow = () => {
+const LoginWindow = ({ setIsModalOpen, setUserToken }) => {
+    const [failedLogin, setFailedLogin] = useState(false);
+
+    const schema = yup.object().shape({
+        username: yup.string().required('Login is required'),
+        password: yup.string().required('Password is required')
+    });
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const login = loginData => {
+        api.post('/auth/login', loginData )
+            .then(res => {
+                localStorage.setItem('everythin-shop:token', JSON.stringify(res.data.token));
+                setUserToken(res.data.token);
+                toast.success('You"re logged in, now you can close your order!')
+                setFailedLogin(false);
+                setIsModalOpen(false);
+            })
+            .catch(err => {
+                setFailedLogin(true);
+            });
+    }
 
     return (
         <LoginWindowContainer>
@@ -8,15 +38,36 @@ const LoginWindow = () => {
             <h3 className = 'login-window-subtitle'> Log In to Close your Order </h3>
 
             <div className = 'login-window-content-wrapper'>
-                <form className = 'login-window-form-container'>
+                <form onSubmit = {handleSubmit(login)} className = 'login-window-form-container'>
                     <p className = 'login-window-input-container login-window-email-input'>
-                        <label className = 'login-window-input-label'> E-mail </label>
-                        <input className = 'login-window-input' type = 'email' placeholder = 'Your e-mail'/>
+                        <label className = 'login-window-input-label'> Username </label>
+                        <input {...register('username')} 
+                            className = 'login-window-input'  
+                            placeholder = 'Your username'/>
                     </p>
+                    {errors.login &&
+                        <span className = 'login-window-input-empty'>
+                             {errors.login?.message} 
+                        </span>
+                    }
+
                     <p className = 'login-window-input-container login-window-password-input'>
                         <label className = 'login-window-input-label'> Password </label>
-                        <input className = 'login-window-input' type = 'password' placeholder = 'Your password'/>
+                        <input {...register('password')} 
+                            className = 'login-window-input' 
+                            type = 'password' 
+                            placeholder = 'Your password'/>
                     </p>
+                    {errors.password &&
+                        <span className = 'login-window-input-empty'>
+                            { errors.password?.message }
+                        </span>
+                    }
+
+                    {failedLogin && 
+                        <p className = 'login-window-input-failed-login'> Username or password are invalid </p>
+                    }
+
                     <button className = 'login-window-button-submit'> Login </button>
                 </form>
 
@@ -29,8 +80,8 @@ const LoginWindow = () => {
                 <p className = 'login-window-second-message'> Here is an example: </p>
 
                 <p className = 'login-window-example'>
-                    <span className = 'login-window-example-highlight'> e-mail: </span>
-                    atuny0@sohu.com
+                    <span className = 'login-window-example-highlight'> username: </span>
+                    atuny0
                 </p>
 
                 <p className = 'login-window-example'>
