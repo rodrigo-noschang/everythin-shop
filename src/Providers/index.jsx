@@ -2,6 +2,7 @@ import { CartProvider } from "./Cart";
 import { CategoryFilterProvider } from "./CategoryFilter";
 import { SearchShopPorivder } from "./SearchShop";
 import { OrderClosedProvider } from "./OrderClosed";
+import { LoginProvider } from "./Login";
 
 const Providers = ({ children }) => {
     return (
@@ -9,7 +10,9 @@ const Providers = ({ children }) => {
             <CategoryFilterProvider>
                 <SearchShopPorivder>
                     <OrderClosedProvider>
-                        { children }
+                        <LoginProvider>
+                            { children }
+                        </LoginProvider>
                     </OrderClosedProvider>
                 </SearchShopPorivder>
             </CategoryFilterProvider>

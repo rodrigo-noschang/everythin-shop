@@ -4,18 +4,25 @@ import {
     AiOutlineSearch,
     AiOutlineShoppingCart,
     AiFillShopping, 
-    AiOutlineClose }  from 'react-icons/ai';
+    AiOutlineClose,
+    AiOutlineLogin,
+    AiOutlineLogout }  from 'react-icons/ai';
 import { useState } from "react";
 import HeaderCategoryItem from "../HeaderCategoryItem";
 import { useNavigate } from "react-router-dom";
 import { useCategoryFilter } from "../../Providers/CategoryFilter";
 import { useSearchShop } from "../../Providers/SearchShop";
+import { useLogin } from '../../Providers/Login';
+import Modal from "../Modal";
+import LoginWindow from "../LoginWindow";
 
 const Header = ({ page }) => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
     const navigate = useNavigate();
     const { setCategoryFilter } = useCategoryFilter();
     const { setSearchInput, searchInput } = useSearchShop();
+    const { isLoggedIn, logUserIn, logUserOut } = useLogin();
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
     const changeModalStatus = () => {
         setHeaderCategoriesOpen(!headerCategoriesOpen);
@@ -48,8 +55,17 @@ const Header = ({ page }) => {
         setSearchInput('');
     }
 
+    const openLoginModal = () => {
+        setIsLoginModalOpen(true);
+    }
+
+    const redirectAndLogUserOut = () => {
+        navigate('/');
+        logUserOut();
+    }
+
     return (
-        <HeaderContainer>
+        <HeaderContainer page = {page}>
             <h1 onClick = {goToShopPage} className = 'header-title'> Everythin' Shop </h1>
 
             <div className = 'header-input-container'>
@@ -84,17 +100,38 @@ const Header = ({ page }) => {
                 }
             </div>
 
-            {page === 'shop' ?
-                <div onClick = { goToCartPage } className = 'header-go-to-cart-container'>
-                    <span className = 'header-go-to-cart-cart'> <AiOutlineShoppingCart /> </span>
-                    <span className = 'header-go-to-cart-name'> Cart </span>
-                </div>
-                :
-                <div onClick = { goToShopPage } className = 'header-go-to-shop-container'>
-                    <span className = 'header-go-to-shop-shop'> <AiFillShopping /> </span>
-                    <span className = 'header-go-to-shop-name'> Back to Shop </span>
-                </div>
+            <div className = 'header-goto-login-container'>
+                {page === 'shop' ?
+                    <div onClick = { goToCartPage } className = 'header-go-to-cart-container'>
+                        <span className = 'header-go-to-cart-cart'> <AiOutlineShoppingCart /> </span>
+                        <span className = 'header-go-to-cart-name'> Cart </span>
+                    </div>
+                    :
+                    <div onClick = { goToShopPage } className = 'header-go-to-shop-container'>
+                        <span className = 'header-go-to-shop-shop'> <AiFillShopping /> </span>
+                        <span className = 'header-go-to-shop-name'> Back to Shop </span>
+                    </div>
+                }
+
+                {isLoggedIn ? 
+                    <div onClick = {redirectAndLogUserOut} className = 'header-login-container'>
+                        <AiOutlineLogout className = 'header-login-logout-icon'/>
+                        <span className = 'header-login-logout-text'> Logout </span>
+                    </div> 
+                : 
+                    <div onClick = {openLoginModal} className = 'header-login-container'>
+                        <AiOutlineLogin className = 'header-login-logout-icon'/>
+                        <span className = 'header-login-logout-text'> Login </span>
+                    </div> 
+                }
+            </div>
+
+            {isLoginModalOpen &&
+                <Modal setIsModalOpen = {setIsLoginModalOpen}>
+                    <LoginWindow setIsModalOpen = {setIsLoginModalOpen}/>
+                </Modal>
             }
+
         </HeaderContainer>
     )
 }

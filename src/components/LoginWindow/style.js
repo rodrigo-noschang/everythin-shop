@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const LoginWindowContainer = styled.div`
+    color: black;
+
     .login-window-title {
         background-color: var(--purple);
         color: var(--yellow);

@@ -9,15 +9,14 @@ import Modal from '../../components/Modal';
 import LoginWindow from "../../components/LoginWindow";
 import { useOrderClosed } from '../../Providers/OrderClosed'
 import { toast } from "react-toastify";
+import { useLogin } from "../../Providers/Login";
 
 const Cart = () => {
     const [isCouponValid, setIsCouponValid] = useState('');
     const [couponValue, setCouponValue] = useState('');
     const [loginModal, setLoginModal] = useState(false);
     const [emptyCart, setEmptyCart] = useState(false);
-    const [userToken, setUserToken] = useState(
-        JSON.parse(localStorage.getItem('everythin-shop:token')) || ''
-    )
+    const { isLoggedIn } = useLogin();
     const { isOrderClosed, setIsOrderClosed } = useOrderClosed();
     const { cart, resetCart } = useCart();
 
@@ -36,12 +35,14 @@ const Cart = () => {
     }
 
     const openLoginModal = () => {
-        if (!userToken) {
+        if (!isLoggedIn) {
             setLoginModal(true);
         } else {
             if (cart.length > 0) {
                 setIsOrderClosed(true);
-                toast.success('Your order was successfully closed');
+                toast.success('Your order was successfully closed', {
+                    position: 'top-left'
+                });
             } else {
                 setEmptyCart(true);
             }
@@ -49,8 +50,13 @@ const Cart = () => {
     }
 
     const enableShopping = () => {
-        resetCart();
-        setIsOrderClosed(false);
+        if (isLoggedIn) {
+            resetCart();
+            setIsOrderClosed(false);
+        } else {
+            setLoginModal(true);
+            resetCart();
+        }
     }
 
     return (
@@ -87,7 +93,7 @@ const Cart = () => {
                                     <input className = 'cart-discount-insert-coupon' 
                                         placeholder = 'Insert your coupon here'
                                         onChange = {updateCouponValue}/>
-                                </p>
+                                </p>enableShopping
                                 { isCouponValid === false && 
                                     <>
                                         <p className = 'cart-discount-invalid-coupon-message'> 
@@ -132,7 +138,7 @@ const Cart = () => {
             </div>
             { loginModal && 
             <Modal setIsModalOpen = {setLoginModal}>
-                <LoginWindow setIsModalOpen = {setLoginModal} setUserToken = {setUserToken}/>
+                <LoginWindow setIsModalOpen = {setLoginModal}/>
             </Modal>
             }
         </CartPageContainer>

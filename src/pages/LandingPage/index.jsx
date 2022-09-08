@@ -1,5 +1,6 @@
 import Header from "../../components/Header";
-import Carousel from "../../components/Carousel";
+import Carousel from "react-material-ui-carousel";
+import CarouselItem from "../../components/CarouselItem";
 import Shop from "../../components/Shop";
 import BottomList from "../../components/BottomList";
 import Footer from "../../components/Footer";
@@ -41,7 +42,13 @@ const LandingPage = () => {
         <LandingPageContainer className = 'page-container'>
             <Header page = 'shop'/>
             { areImagesLoaded &&
-                <Carousel carouselList = {shopList.slice(0, 5)} />
+                <Carousel className = 'carousel-container'>
+                    { 
+                        shopList.slice(0, 5).map((item, i) => {
+                            return <CarouselItem key = {i} item = {item}/>
+                        }) 
+                    }
+                </Carousel>
             }
             <Shop 
                 setAreImagesLoaded = {setAreImagesLoaded} 

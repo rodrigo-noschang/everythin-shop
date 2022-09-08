@@ -5,9 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../../services/api';
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useLogin } from "../../Providers/Login";
 
-const LoginWindow = ({ setIsModalOpen, setUserToken }) => {
+const LoginWindow = ({ setIsModalOpen }) => {
     const [failedLogin, setFailedLogin] = useState(false);
+    const { logUserIn } = useLogin();
 
     const schema = yup.object().shape({
         username: yup.string().required('Login is required'),
@@ -21,9 +23,10 @@ const LoginWindow = ({ setIsModalOpen, setUserToken }) => {
     const login = loginData => {
         api.post('/auth/login', loginData )
             .then(res => {
-                localStorage.setItem('everythin-shop:token', JSON.stringify(res.data.token));
-                setUserToken(res.data.token);
-                toast.success('You"re logged in, now you can close your order!')
+                logUserIn(res.data.token);
+                toast.success('You"re logged in, now you can close your order!', {
+                    position: 'top-left'
+                })
                 setFailedLogin(false);
                 setIsModalOpen(false);
             })

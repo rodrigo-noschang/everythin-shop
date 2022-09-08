@@ -6,6 +6,7 @@ const CarouselItemContainer = styled.li`
     max-width: 650px;
     max-height: 390px;
     position: relative;
+    margin: 0 auto;
 
     .carousel-item-figure {
         margin: 0 auto;
