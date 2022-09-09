@@ -16,7 +16,7 @@ const Cart = () => {
     const [couponValue, setCouponValue] = useState('');
     const [loginModal, setLoginModal] = useState(false);
     const [emptyCart, setEmptyCart] = useState(false);
-    const [openNewOrder, setOpenNewOrder] = useState(false);
+    const [command, setCommand] = useState('');
     const { isLoggedIn } = useLogin();
     const { isOrderClosed, setIsOrderClosed } = useOrderClosed();
     const { cart, resetCart } = useCart();
@@ -35,8 +35,9 @@ const Cart = () => {
         evt.preventDefault();
     }
 
-    const openLoginModal = () => {
+    const closeOrder = () => {
         if (!isLoggedIn) {
+            setCommand('close-order')
             setLoginModal(true);
         } else {
             if (cart.length > 0) {
@@ -55,7 +56,7 @@ const Cart = () => {
             resetCart();
             setIsOrderClosed(false);
         } else {
-            setOpenNewOrder(true);
+            setCommand('new-order');
             setLoginModal(true);
         }
     }
@@ -73,7 +74,7 @@ const Cart = () => {
                                 <button disabled className = 'cart-section-order-closed-button'> Order Closed </button>
                             </div>
                             :
-                            <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-top'> Close Order </button>    
+                            <button onClick = {closeOrder} className = 'cart-section-close-order cart-section-close-order-top'> Close Order </button>    
                         }
                         { emptyCart && 
                             <p className = 'cart-section-close-order-empty-cart'> Add an item to your cart, so that you can close your order. </p>
@@ -128,7 +129,7 @@ const Cart = () => {
                         {isOrderClosed ? 
                             <button disabled className = 'cart-section-order-closed-button'> Order Closed </button>
                             :
-                            <button onClick = {openLoginModal} className = 'cart-section-close-order cart-section-close-order-bottom'> Close Order </button>
+                            <button onClick = {closeOrder} className = 'cart-section-close-order cart-section-close-order-bottom'> Close Order </button>
                         }
                         { emptyCart && 
                             <p className = 'cart-section-close-order-empty-cart'> Add an item to your cart, so that you can close your order. </p>
@@ -139,7 +140,7 @@ const Cart = () => {
             </div>
             { loginModal && 
             <Modal setIsModalOpen = {setLoginModal}>
-                <LoginWindow setIsModalOpen = {setLoginModal} openNewOrder = {openNewOrder} resetCart = {resetCart} setIsOrderClosed = {setIsOrderClosed}/>
+                <LoginWindow setIsModalOpen = {setLoginModal} command = {command} resetCart = {resetCart} setIsOrderClosed = {setIsOrderClosed}/>
             </Modal>
             }
         </CartPageContainer>

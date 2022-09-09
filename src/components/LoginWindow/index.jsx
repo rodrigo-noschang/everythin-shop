@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useLogin } from "../../Providers/Login";
 
-const LoginWindow = ({ setIsModalOpen, openNewOrder, resetCart, setIsOrderClosed }) => {
+const LoginWindow = ({ setIsModalOpen, command, resetCart, setIsOrderClosed }) => {
     const [failedLogin, setFailedLogin] = useState(false);
     const { logUserIn } = useLogin();
 
@@ -24,14 +24,20 @@ const LoginWindow = ({ setIsModalOpen, openNewOrder, resetCart, setIsOrderClosed
         api.post('/auth/login', loginData )
             .then(res => {
                 logUserIn(res.data.token);
-                toast.success('You"re logged in, now you can close your order or open a new one!', {
-                    position: 'top-left'
-                })
                 setFailedLogin(false);
                 setIsModalOpen(false);
-                if (openNewOrder) {
+                
+                if (command === 'new-order') { // user loged in to open a new order
+                    toast.success('You"re logged in, now you can open a new order', {
+                        position: 'top-left'
+                    })
                     resetCart();
                     setIsOrderClosed(false);
+                }
+                if (command === 'close-oder') { // user loged in to close an already existing order
+                    toast.success('You"re logged in, now you can close your order', {
+                        position: 'top-left'
+                    })
                 }
             })
             .catch(err => {

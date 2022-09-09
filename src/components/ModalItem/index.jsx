@@ -11,6 +11,7 @@ const ModalItem = ({ setIsModalOpen, item }) => {
     const [currentImage, setCurrentImage] = useState(item.thumbnail)
     const { addToCart } = useCart();
     const { isOrderClosed } = useOrderClosed();
+    console.log(item);
 
     const increaseAmount = () => {
         if (!isOrderClosed) setItemAmount(itemAmount + 1);

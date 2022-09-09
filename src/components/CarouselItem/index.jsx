@@ -3,8 +3,10 @@ import CarouselItemContainer from "./style";
 
 const CarouselItem = ({ item, setCarouselItemSelected, setIsCarouselItemSelected }) => {
     const selectCarouselItem = () => {
+        const discountedPrice = item.price * (1 - item.discountPercentage/100);
+        const discountedPriceItem = {...item, price: discountedPrice};
         setIsCarouselItemSelected(true);
-        setCarouselItemSelected(item);
+        setCarouselItemSelected(discountedPriceItem);
     }
     
     return (
