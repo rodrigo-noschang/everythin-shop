@@ -21,7 +21,7 @@ const Header = ({ page }) => {
     const navigate = useNavigate();
     const { setCategoryFilter } = useCategoryFilter();
     const { setSearchInput, searchInput } = useSearchShop();
-    const { isLoggedIn, logUserIn, logUserOut } = useLogin();
+    const { isLoggedIn, logUserOut } = useLogin();
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
     const changeModalStatus = () => {

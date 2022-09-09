@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useLogin } from "../../Providers/Login";
 
-const LoginWindow = ({ setIsModalOpen }) => {
+const LoginWindow = ({ setIsModalOpen, openNewOrder, resetCart, setIsOrderClosed }) => {
     const [failedLogin, setFailedLogin] = useState(false);
     const { logUserIn } = useLogin();
 
     const schema = yup.object().shape({
-        username: yup.string().required('Login is required'),
+        username: yup.string().required('Username is required'),
         password: yup.string().required('Password is required')
     });
 
@@ -24,11 +24,15 @@ const LoginWindow = ({ setIsModalOpen }) => {
         api.post('/auth/login', loginData )
             .then(res => {
                 logUserIn(res.data.token);
-                toast.success('You"re logged in, now you can close your order!', {
+                toast.success('You"re logged in, now you can close your order or open a new one!', {
                     position: 'top-left'
                 })
                 setFailedLogin(false);
                 setIsModalOpen(false);
+                if (openNewOrder) {
+                    resetCart();
+                    setIsOrderClosed(false);
+                }
             })
             .catch(err => {
                 setFailedLogin(true);
@@ -48,9 +52,9 @@ const LoginWindow = ({ setIsModalOpen }) => {
                             className = 'login-window-input'  
                             placeholder = 'Your username'/>
                     </p>
-                    {errors.login &&
+                    {errors.username &&
                         <span className = 'login-window-input-empty'>
-                             {errors.login?.message} 
+                             {errors.username?.message} 
                         </span>
                     }
 

@@ -16,6 +16,7 @@ const Cart = () => {
     const [couponValue, setCouponValue] = useState('');
     const [loginModal, setLoginModal] = useState(false);
     const [emptyCart, setEmptyCart] = useState(false);
+    const [openNewOrder, setOpenNewOrder] = useState(false);
     const { isLoggedIn } = useLogin();
     const { isOrderClosed, setIsOrderClosed } = useOrderClosed();
     const { cart, resetCart } = useCart();
@@ -54,9 +55,8 @@ const Cart = () => {
             resetCart();
             setIsOrderClosed(false);
         } else {
+            setOpenNewOrder(true);
             setLoginModal(true);
-            resetCart();
-            setIsOrderClosed(false);
         }
     }
 
@@ -139,7 +139,7 @@ const Cart = () => {
             </div>
             { loginModal && 
             <Modal setIsModalOpen = {setLoginModal}>
-                <LoginWindow setIsModalOpen = {setLoginModal}/>
+                <LoginWindow setIsModalOpen = {setLoginModal} openNewOrder = {openNewOrder} resetCart = {resetCart} setIsOrderClosed = {setIsOrderClosed}/>
             </Modal>
             }
         </CartPageContainer>

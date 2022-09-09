@@ -77,7 +77,7 @@ const HeaderContainer = styled.header`
         padding: 0 10px;
         box-shadow: 0 8px 10px 0px #000;
         width: 165px;
-        z-index: 1;
+        z-index: 2;
     }
 
     .header-goto-login-container {
