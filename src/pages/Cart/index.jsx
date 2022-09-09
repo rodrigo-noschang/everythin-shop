@@ -56,6 +56,7 @@ const Cart = () => {
         } else {
             setLoginModal(true);
             resetCart();
+            setIsOrderClosed(false);
         }
     }
 
@@ -93,7 +94,7 @@ const Cart = () => {
                                     <input className = 'cart-discount-insert-coupon' 
                                         placeholder = 'Insert your coupon here'
                                         onChange = {updateCouponValue}/>
-                                </p>enableShopping
+                                </p>
                                 { isCouponValid === false && 
                                     <>
                                         <p className = 'cart-discount-invalid-coupon-message'> 

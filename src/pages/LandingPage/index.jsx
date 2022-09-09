@@ -5,6 +5,8 @@ import Shop from "../../components/Shop";
 import BottomList from "../../components/BottomList";
 import Footer from "../../components/Footer";
 import LandingPageContainer from "./style";
+import Modal from "../../components/Modal";
+import ModalItem from "../../components/ModalItem";
 import api from '../../services/api';
 import { useEffect, useState } from "react";
 import { useCategoryFilter } from "../../Providers/CategoryFilter";
@@ -16,6 +18,8 @@ const LandingPage = () => {
     );
     const [apiSkipCounter, setApiSkipCounter] = useState(1)
     const [areImagesLoaded, setAreImagesLoaded] = useState(false);
+    const [carouselItemSelected, setCarouselItemSelected] = useState({});
+    const [isCarouselItemSelected, setIsCarouselItemSelected] = useState(false);
     const { categoryFilter } = useCategoryFilter();
     const { searchInput } = useSearchShop();
 
@@ -45,7 +49,7 @@ const LandingPage = () => {
                 <Carousel className = 'carousel-container'>
                     { 
                         shopList.slice(0, 5).map((item, i) => {
-                            return <CarouselItem key = {i} item = {item}/>
+                            return <CarouselItem key = {i} item = {item} setCarouselItemSelected = {setCarouselItemSelected} setIsCarouselItemSelected = {setIsCarouselItemSelected}/>
                         }) 
                     }
                 </Carousel>
@@ -67,6 +71,11 @@ const LandingPage = () => {
                     <BottomList bottomList = {shopList.slice(5, 14)} />
                     <Footer />
                 </>
+            }
+            {isCarouselItemSelected && 
+                <Modal setIsModalOpen = {setIsCarouselItemSelected}>
+                    <ModalItem setIsModalOpen = {setIsCarouselItemSelected} item = {carouselItemSelected}/>
+                </Modal>
             }
         </LandingPageContainer>
     )

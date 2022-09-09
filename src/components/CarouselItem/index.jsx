@@ -1,8 +1,14 @@
 import CarouselItemContainer from "./style";
 
-const CarouselItem = ({ item }) => {
+
+const CarouselItem = ({ item, setCarouselItemSelected, setIsCarouselItemSelected }) => {
+    const selectCarouselItem = () => {
+        setIsCarouselItemSelected(true);
+        setCarouselItemSelected(item);
+    }
+    
     return (
-        <CarouselItemContainer className = 'carouse-item-container'>
+        <CarouselItemContainer onClick = {selectCarouselItem} className = 'carouse-item-container'>
             <figure className = 'carousel-item-figure'>
                 <img src={item.thumbnail} 
                     alt = {item.description} 
