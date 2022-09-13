@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import LandingPageContainer from "./style";
 import Modal from "../../components/Modal";
 import ModalItem from "../../components/ModalItem";
+import Disclaimer from "../../components/Disclaimer";
 import api from '../../services/api';
 import { useEffect, useState } from "react";
 import { useCategoryFilter } from "../../Providers/CategoryFilter";
@@ -20,12 +21,14 @@ const LandingPage = () => {
     const [areImagesLoaded, setAreImagesLoaded] = useState(false);
     const [carouselItemSelected, setCarouselItemSelected] = useState({});
     const [isCarouselItemSelected, setIsCarouselItemSelected] = useState(false);
+    // I'm using the shopList length to identify the very first time the user opens the application.
+    // In that case, I show him the disclaimer.
+    const [showDisclaimer, setShowDisclaimer] = useState(!shopList.length);
     const { categoryFilter } = useCategoryFilter();
     const { searchInput } = useSearchShop();
 
     useEffect(() => {
         if (shopList.length === 0) {
-            console.log('Chamou');
             api.get('/products?skip=0&limit=100')
             .then (res => {
                 const newList = res.data.products;
@@ -69,12 +72,17 @@ const LandingPage = () => {
             { areImagesLoaded &&
                 <>
                     <BottomList bottomList = {shopList.slice(5, 14)} />
-                    <Footer />
+                    <Footer setShowDisclaimer = {setShowDisclaimer}/>
                 </>
             }
             {isCarouselItemSelected && 
                 <Modal setIsModalOpen = {setIsCarouselItemSelected}>
                     <ModalItem setIsModalOpen = {setIsCarouselItemSelected} item = {carouselItemSelected}/>
+                </Modal>
+            }
+            {showDisclaimer && 
+                <Modal setIsModalOpen = {setShowDisclaimer}>
+                    <Disclaimer setIsModalOpen = {setShowDisclaimer}/>
                 </Modal>
             }
         </LandingPageContainer>

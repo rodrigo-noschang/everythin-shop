@@ -43,6 +43,8 @@ const FooterContainer = styled.footer`
         flex-direction: column;
         align-items: center;
         cursor: pointer;
+        color: var(--yellow);
+        text-decoration: none;
     }
 
     .contact-me-social:hover {
@@ -56,8 +58,21 @@ const FooterContainer = styled.footer`
         margin-bottom: 7px;
     }
 
+    .footer-open-disclaimer {
+        margin-top: 15px;
+        text-align: right;
+        font-size: 12px;
+    }
+    
+    .footer-open-disclaimer-content {
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+    }
 
-
+    .footer-open-disclaimer-content:hover {
+        border-bottom-color: var(--yellow);
+        transition: .2s;
+    }
 `;
 
 export default FooterContainer;

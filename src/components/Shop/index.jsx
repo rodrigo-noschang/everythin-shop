@@ -5,15 +5,15 @@ import { useSearchShop } from "../../Providers/SearchShop";
 
 const Shop = ({ setAreImagesLoaded, list, fullList }) => {
     const { categoryFilter } = useCategoryFilter();
-    const { searchInput } = useSearchShop();
+    const searchInput = useSearchShop().searchInput.toLowerCase().trim();
     const filteredList = categoryFilter !== '' && searchInput === '' ? 
         fullList.filter(item => item.category === categoryFilter)
         : 
         categoryFilter === '' && searchInput !== '' ?
             fullList.filter(item => { return (
-                item.title.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.description.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.category.toLowerCase().includes(searchInput.toLowerCase())
+                item.title.toLowerCase().includes(searchInput.toLowerCase().trim()) ||
+                item.description.toLowerCase().includes(searchInput.toLowerCase().trim()) ||
+                item.category.toLowerCase().includes(searchInput.toLowerCase().trim())
             )})
         :
         [];

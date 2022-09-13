@@ -26,21 +26,21 @@ const LoginWindow = ({ setIsModalOpen, command, resetCart, setIsOrderClosed }) =
                 logUserIn(res.data.token);
                 setFailedLogin(false);
                 setIsModalOpen(false);
-                
+
                 if (command === 'new-order') { // user loged in to open a new order
-                    toast.success('You"re logged in, now you can open a new order', {
+                    toast.success('A new order was opened.', {
                         position: 'top-left'
                     })
                     resetCart();
                     setIsOrderClosed(false);
-                }
-                if (command === 'close-oder') { // user loged in to close an already existing order
-                    toast.success('You"re logged in, now you can close your order', {
+                } else if (command === 'close-order') { // user loged in to close an already existing order
+                    toast.success('You are logged in, now you can close your order!', {
                         position: 'top-left'
                     })
                 }
             })
             .catch(err => {
+                console.log('Deu ruim');
                 setFailedLogin(true);
             });
     }
