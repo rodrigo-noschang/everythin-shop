@@ -1,4 +1,18 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const appearList = keyframes`
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+    }
+    
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+`;
 
 const DisclaimerContainer = styled.div`
     max-height: 80vh;
@@ -52,9 +66,7 @@ const DisclaimerContainer = styled.div`
     }
 
     .disclaimer-functionalities-show-hide {
-        /* transform: ${props => props.isFunctionalitiesShown ? 
-            'scaleY(1)' : 'scaleY(0)'
-        }; */
+        animation: ${appearList} .3s;
     }
 
     .disclaimer-functionalities-list-container {
