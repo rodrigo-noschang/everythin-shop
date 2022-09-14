@@ -43,6 +43,7 @@ const Header = ({ page }) => {
     
     const goToShopPage = () => {
         setCategoryFilter('');
+        setSearchInput('');
         navigate('/');
     }
 
@@ -90,12 +91,36 @@ const Header = ({ page }) => {
 
                 {headerCategoriesOpen && 
                     <ul className = 'header-categories-container'>
-                        <HeaderCategoryItem key = {'key-1'} subCategories = {subCategories.initial}> Initial Shop </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-2'} subCategories = {subCategories.womensClothing}> Women's Clothing </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-3'} subCategories = {subCategories.mensClothing}> Men's Clothing </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-4'} subCategories = {subCategories.accessories}> Accessories </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-5'} subCategories = {subCategories.interiorDesign}> Interior Design </HeaderCategoryItem>
-                        <HeaderCategoryItem key = {'key-6'} subCategories = {subCategories.tech}> Tech </HeaderCategoryItem>
+                        <HeaderCategoryItem key = 'key-1' 
+                            subCategories = {subCategories.initial} 
+                            setHeaderCategoriesOpen = {setHeaderCategoriesOpen} >
+                            Initial Shop 
+                        </HeaderCategoryItem>
+                        <HeaderCategoryItem key = 'key-2' 
+                            subCategories = {subCategories.womensClothing} 
+                            setHeaderCategoriesOpen = {setHeaderCategoriesOpen}>
+                            Women's Clothing 
+                        </HeaderCategoryItem>
+                        <HeaderCategoryItem key = 'key-3' 
+                            subCategories = {subCategories.mensClothing} 
+                            setHeaderCategoriesOpen = {setHeaderCategoriesOpen}>
+                            Men's Clothing 
+                        </HeaderCategoryItem>
+                        <HeaderCategoryItem key = 'key-4' 
+                            subCategories = {subCategories.accessories} 
+                            setHeaderCategoriesOpen = {setHeaderCategoriesOpen}>
+                            Accessories 
+                        </HeaderCategoryItem>
+                        <HeaderCategoryItem key = 'key-5' 
+                            subCategories = {subCategories.interiorDesign} 
+                            setHeaderCategoriesOpen = {setHeaderCategoriesOpen}>
+                            Interior Design 
+                        </HeaderCategoryItem>
+                        <HeaderCategoryItem key = 'key-6' 
+                            subCategories = {subCategories.tech} 
+                            setHeaderCategoriesOpen = {setHeaderCategoriesOpen}>
+                            Tech 
+                        </HeaderCategoryItem>
                     </ul>
                 }
             </div>

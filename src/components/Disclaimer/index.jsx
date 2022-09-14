@@ -37,7 +37,7 @@ const Disclaimer = () => {
                 </p>
                 <p className = 'disclaimer-info'>
                     Hope you enjoy it, and feel free to give me any feedback you'd like!
-                    (my emai, github and linkedin are at the bottom of the page!)
+                    (my email, github and linkedin are at the bottom of the page!)
                 </p>
 
                 <p className = 'disclaimer-info'>

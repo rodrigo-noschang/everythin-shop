@@ -4,12 +4,13 @@ import { useState } from 'react';
 import { useCategoryFilter } from '../../Providers/CategoryFilter';
 import { useSearchShop } from '../../Providers/SearchShop';
 
-const HeaderCategoryItem = ({children, subCategories}) => {
+const HeaderCategoryItem = ({children, subCategories, setHeaderCategoriesOpen}) => {
     const [isSubcategoriesOpen, setIsSubcategoriesOpen] = useState(false);
     const { setCategoryFilter } = useCategoryFilter();
     const { setSearchInput } = useSearchShop();
 
     const showCategory = evt => {
+        setHeaderCategoriesOpen(false);
         let selectedCategory = evt.target.innerText;
         if (selectedCategory === 'normal-shop') selectedCategory = '';
         setCategoryFilter(selectedCategory);
