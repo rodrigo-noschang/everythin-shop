@@ -15,6 +15,7 @@ import { useSearchShop } from "../../Providers/SearchShop";
 import { useLogin } from '../../Providers/Login';
 import Modal from "../Modal";
 import LoginWindow from "../LoginWindow";
+import { useCart } from '../../Providers/Cart';
 
 const Header = ({ page }) => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
@@ -23,6 +24,7 @@ const Header = ({ page }) => {
     const { setSearchInput, searchInput } = useSearchShop();
     const { isLoggedIn, logUserOut } = useLogin();
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+    const { cart } = useCart();
 
     const changeModalStatus = () => {
         setHeaderCategoriesOpen(!headerCategoriesOpen);
@@ -66,7 +68,7 @@ const Header = ({ page }) => {
     }
 
     return (
-        <HeaderContainer page = {page}>
+        <HeaderContainer page = {page} cartAmount = {cart.length}>
             <h1 onClick = {goToShopPage} className = 'header-title'> Everythin' Shop </h1>
 
             <div className = 'header-input-container'>

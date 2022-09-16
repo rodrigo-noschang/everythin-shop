@@ -95,7 +95,25 @@ const HeaderContainer = styled.header`
 
     .header-go-to-cart-cart {
         font-size: 20px;
+        position: relative;
     }
+
+    .header-go-to-cart-cart::before {
+        content: '${props => props.cartAmount}';
+        display: ${props => props.cartAmount ? 'block' : 'none'};
+        position: absolute;
+        text-align: center;
+        background-color: red;
+        width: 15px;
+        height: 15px;
+        top: 10px;
+        left: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
 
     .header-go-to-shop-shop {
         font-size: 18px;
