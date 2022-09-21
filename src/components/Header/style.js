@@ -30,6 +30,8 @@ const HeaderContainer = styled.header`
         width: 90vw;
         max-width: 550px;
         position: relative;
+        background-color: #FFF;
+        border-radius: 0 5px 5px 0;
     }
 
     .header-search-filter {
@@ -56,9 +58,14 @@ const HeaderContainer = styled.header`
     .header-search-filter-clear-container {
         background-color: #FFF;
         color: black;
-        align-self: center;
-        line-height: 33px;
         cursor: pointer;
+        margin-right: 2px;
+        width: 15px;
+    }
+
+    .header-search-filter-clear {
+        display: block;
+        height: 100%;
     }
 
     .header-search-search {

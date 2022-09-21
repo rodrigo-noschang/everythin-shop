@@ -71,21 +71,24 @@ const Header = ({ page }) => {
         <HeaderContainer page = {page} cartAmount = {cart.length}>
             <h1 onClick = {goToShopPage} className = 'header-title'> Everythin' Shop </h1>
 
+            { page !== 'cart' &&
             <div className = 'header-input-container'>
                 <div onClick = {changeModalStatus} className = 'header-search-filter'>
                     <span className = 'header-search-filter-selected'> All </span>
                     <span className = 'header-search-filter-arrow'> <AiOutlineDown /> </span>
                 </div>
+                
                 <input className = 'header-search-input' 
                     placeholder = 'Your search here' 
                     onChange = {updateSearchInput}
                     value = {searchInput} />
-
-                { searchInput &&
+                
+                
                 <div onClick = {resetSearchInput} className = 'header-search-filter-clear-container'>
+                    { searchInput &&
                     <AiOutlineClose className = 'header-search-filter-clear'/>
+                    }
                 </div>
-                }
 
                 <button className = 'header-search-search'> 
                     <AiOutlineSearch /> 
@@ -126,6 +129,7 @@ const Header = ({ page }) => {
                     </ul>
                 }
             </div>
+            }
 
             <div className = 'header-goto-login-container'>
                 {page === 'shop' ?
