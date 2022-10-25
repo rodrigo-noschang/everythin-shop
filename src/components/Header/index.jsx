@@ -16,6 +16,7 @@ import { useLogin } from '../../Providers/Login';
 import Modal from "../Modal";
 import LoginWindow from "../LoginWindow";
 import { useCart } from '../../Providers/Cart';
+import { useEffect } from "react";
 
 const Header = ({ page }) => {
     const [headerCategoriesOpen, setHeaderCategoriesOpen] = useState(false);
@@ -25,6 +26,14 @@ const Header = ({ page }) => {
     const { isLoggedIn, logUserOut } = useLogin();
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const { cart } = useCart();
+
+    useEffect(() => {
+        window.addEventListener('beforeunload', () => {
+            localStorage.removeItem('everythin-shop:list');
+            localStorage.removeItem('everythin-shop:token');
+        })
+    })
+
 
     const changeModalStatus = () => {
         setHeaderCategoriesOpen(!headerCategoriesOpen);
